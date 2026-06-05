@@ -65,13 +65,17 @@ di              NetworkModule (Retrofit + Moshi)
 
 **Menu** — category sidebar with long-press tooltips (Material3 `TooltipBox`) that show the full category description from TheMealDB (`strCategoryDescription`); availability filter chips (ALL / AVAILABLE / SOLD OUT); meal cards with inline cart quantity controls. Sold-out items are dimmed and cannot be added. Loading spinner and error + retry.
 
-<img width="1080" height="2412" alt="image" src="https://github.com/user-attachments/assets/5e94a0b0-270b-4264-95f1-4d63f03a9736" />
+<p align="center">
+  <img width="260" alt="Menu screen" src="https://github.com/user-attachments/assets/5e94a0b0-270b-4264-95f1-4d63f03a9736" />
+</p>
 
 **Cart** — line items with +/- controls, running total, Place Order with loading / success / error states. Empty cart and order-success use the same centred layout. Cart quantity survives rotation.
 
-<img width="1080" height="2412" alt="image" src="https://github.com/user-attachments/assets/e7424ec1-a64c-4f47-9825-46798d7c728d" />
-<img width="1080" height="2412" alt="image" src="https://github.com/user-attachments/assets/417ec0e3-dad8-4c30-a1ce-48141665f50d" />
-<img width="1080" height="2412" alt="image" src="https://github.com/user-attachments/assets/898be7b8-ab88-43b5-8b00-5097ca96e373" />
+<p align="center">
+  <img width="220" alt="Cart with items" src="https://github.com/user-attachments/assets/e7424ec1-a64c-4f47-9825-46798d7c728d" />
+  <img width="220" alt="Place order loading" src="https://github.com/user-attachments/assets/417ec0e3-dad8-4c30-a1ce-48141665f50d" />
+  <img width="220" alt="Order placed successfully" src="https://github.com/user-attachments/assets/898be7b8-ab88-43b5-8b00-5097ca96e373" />
+</p>
 
 ---
 
