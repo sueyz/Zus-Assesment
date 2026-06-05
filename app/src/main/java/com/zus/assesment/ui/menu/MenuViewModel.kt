@@ -4,15 +4,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zus.assesment.data.repository.CartRepository
 import com.zus.assesment.data.repository.MenuRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MenuViewModel(
-    private val menuRepository: MenuRepository = MenuRepository(),
-    private val cartRepository: CartRepository = CartRepository,
+@HiltViewModel
+class MenuViewModel @Inject constructor(
+    private val menuRepository: MenuRepository,
+    private val cartRepository: CartRepository,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(MenuUiState(isLoading = true))
@@ -20,7 +23,8 @@ class MenuViewModel(
 
     init {
         viewModelScope.launch {
-            cartRepository.quantities.collect { quantities ->
+            cartRepository.snapshot.collect { snapshot ->
+                val quantities = snapshot.lines.associate { it.item.id to it.quantity }
                 _uiState.update { it.copy(cartQuantities = quantities) }
             }
         }
@@ -61,8 +65,7 @@ class MenuViewModel(
 
     fun addToCart(itemId: String) {
         val item = _uiState.value.items.find { it.id == itemId } ?: return
-        if (!item.isAvailable) return
-        cartRepository.add(itemId)
+        cartRepository.add(item)
     }
 
     fun decrementFromCart(itemId: String) {

@@ -34,7 +34,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.zus.assesment.ui.components.SloganBannerShape
 import com.zus.assesment.ui.components.SlantedShape
 import com.zus.assesment.ui.menu.components.CategorySidebar
@@ -49,7 +49,8 @@ import com.zus.assesment.ui.theme.ZusWhite
 
 @Composable
 fun MenuScreen(
-    viewModel: MenuViewModel = viewModel(),
+    onCartClick: () -> Unit,
+    viewModel: MenuViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -58,7 +59,10 @@ fun MenuScreen(
             .fillMaxSize()
             .background(ZusBackground),
     ) {
-        MenuHeader(cartItemCount = uiState.cartItemCount)
+        MenuHeader(
+            cartItemCount = uiState.cartItemCount,
+            onCartClick = onCartClick,
+        )
 
         Row(modifier = Modifier.weight(1f)) {
             CategorySidebar(
@@ -134,7 +138,10 @@ fun MenuScreen(
 }
 
 @Composable
-private fun MenuHeader(cartItemCount: Int) {
+private fun MenuHeader(
+    cartItemCount: Int,
+    onCartClick: () -> Unit,
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -169,7 +176,7 @@ private fun MenuHeader(cartItemCount: Int) {
         }
 
         Button(
-            onClick = { },
+            onClick = onCartClick,
             modifier = Modifier.padding(start = 10.dp),
             shape = SlantedShape(slant = 10.dp),
             colors = ButtonDefaults.buttonColors(

@@ -5,16 +5,18 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredHeight
+import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -69,17 +71,19 @@ fun MealCard(
                 .background(ZusWhite),
     ) {
         Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .heightIn(min = MealCardHeight)
-                .height(IntrinsicSize.Min),
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .heightIn(min = MealCardHeight)
+                    .height(IntrinsicSize.Min),
             verticalAlignment = Alignment.Top,
         ) {
             Box(
-                modifier = Modifier
-                    .width(MealImageWidth)
-                    .fillMaxHeight()
-                    .clip(SlantedEndShape(slant = MealImageSlant)),
+                modifier =
+                    Modifier
+                        .width(MealImageWidth)
+                        .fillMaxHeight()
+                        .clip(SlantedEndShape(slant = MealImageSlant)),
             ) {
                 AsyncImage(
                     model = item.imageUrl,
@@ -90,16 +94,18 @@ fun MealCard(
             }
 
             Column(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(start = 8.dp, end = 12.dp, top = 12.dp, bottom = 12.dp),
+                modifier =
+                    Modifier
+                        .weight(1f)
+                        .padding(start = 8.dp, end = 12.dp, top = 12.dp, bottom = 12.dp),
             ) {
                 Text(
                     text = item.name.uppercase(),
-                    style = MaterialTheme.typography.titleSmall.copy(
-                        fontStyle = FontStyle.Normal,
-                        lineHeight = 16.sp,
-                    ),
+                    style =
+                        MaterialTheme.typography.titleSmall.copy(
+                            fontStyle = FontStyle.Normal,
+                            lineHeight = 16.sp,
+                        ),
                     color = ZusBlack,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -113,9 +119,10 @@ fun MealCard(
                     modifier = Modifier.padding(top = 4.dp),
                 )
                 FlowRow(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 6.dp),
+                    modifier =
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(top = 6.dp),
                     horizontalArrangement = Arrangement.spacedBy(6.dp),
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                 ) {
@@ -124,30 +131,32 @@ fun MealCard(
                             text = tag.uppercase(),
                             style = MaterialTheme.typography.bodySmall,
                             color = ZusBlue,
-                            modifier = Modifier
-                                .background(ZusLightGray, RoundedCornerShape(2.dp))
-                                .padding(horizontal = 5.dp, vertical = 1.dp),
+                            modifier =
+                                Modifier
+                                    .background(ZusLightGray, RoundedCornerShape(2.dp))
+                                    .padding(horizontal = 5.dp, vertical = 1.dp),
                         )
                     }
                 }
                 if (item.isAvailable) {
                     Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 10.dp),
+                        modifier =
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(top = 10.dp),
                         horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.End),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         if (quantity > 0) {
                             SlantedIconButton(
                                 label = "−",
-                                enabled = true,
                                 onClick = onDecrement,
                             )
                             Box(
-                                modifier = Modifier
-                                    .width(24.dp)
-                                    .height(CartButtonHeight),
+                                modifier =
+                                    Modifier
+                                        .requiredWidth(24.dp)
+                                        .requiredHeight(CartButtonHeight),
                                 contentAlignment = Alignment.Center,
                             ) {
                                 Text(
@@ -160,7 +169,6 @@ fun MealCard(
                         }
                         SlantedIconButton(
                             label = "+",
-                            enabled = true,
                             onClick = onAdd,
                         )
                     }
@@ -173,30 +181,31 @@ fun MealCard(
 @Composable
 private fun SlantedIconButton(
     label: String,
-    enabled: Boolean,
     onClick: () -> Unit,
 ) {
     Button(
         onClick = onClick,
-        enabled = enabled,
-        modifier = Modifier
-            .width(CartButtonWidth)
-            .height(CartButtonHeight)
-            .defaultMinSize(minWidth = 0.dp, minHeight = 0.dp),
+        modifier =
+            Modifier
+                .requiredWidth(CartButtonWidth)
+                .requiredHeight(CartButtonHeight)
+                .defaultMinSize(minWidth = 0.dp, minHeight = 0.dp),
         shape = SlantedShape(slant = CartButtonSlant),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = ZusBlue,
-            contentColor = ZusWhite,
-            disabledContainerColor = ZusLightGray,
-            disabledContentColor = ZusGray,
-        ),
-        elevation = ButtonDefaults.buttonElevation(
-            defaultElevation = 0.dp,
-            pressedElevation = 0.dp,
-            focusedElevation = 0.dp,
-            hoveredElevation = 0.dp,
-            disabledElevation = 0.dp,
-        ),
+        colors =
+            ButtonDefaults.buttonColors(
+                containerColor = ZusBlue,
+                contentColor = ZusWhite,
+                disabledContainerColor = ZusLightGray,
+                disabledContentColor = ZusGray,
+            ),
+        elevation =
+            ButtonDefaults.buttonElevation(
+                defaultElevation = 0.dp,
+                pressedElevation = 0.dp,
+                focusedElevation = 0.dp,
+                hoveredElevation = 0.dp,
+                disabledElevation = 0.dp,
+            ),
         contentPadding = PaddingValues(0.dp),
     ) {
         Text(
