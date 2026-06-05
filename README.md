@@ -67,6 +67,7 @@ di              NetworkModule (Retrofit + Moshi)
 
 <p align="center">
   <img width="260" alt="Menu screen" src="https://github.com/user-attachments/assets/5e94a0b0-270b-4264-95f1-4d63f03a9736" />
+  <img width="260" alt="Menu screen with tooltip" src="https://github.com/user-attachments/assets/cfad4397-1681-4f83-a3a7-bebb5ea34f94" />
 </p>
 
 **Cart** — line items with +/- controls, running total, Place Order with loading / success / error states. Empty cart and order-success use the same centred layout. Cart quantity survives rotation.
